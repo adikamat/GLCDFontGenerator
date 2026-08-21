@@ -8,26 +8,26 @@ Rectangle {
 
     property int rows: 8
     property int columns: 5
-    property list<int> colData: []
+    property list<int> glyphCode: []
 
     property int cBWidth: 30
     property int cBHeight: 30
 
     function addColumns(numCols: int) {
         for(let i=0; i < numCols; i++) {
-            colData.push(0);
+            glyphCode.push(0);
         }
     }
 
-    function clearColumnData() {
-        for(let i=0; i < colData.length; i++) {
-            colData[i] = 0;
+    function clearGlyphCode() {
+        for(let i=0; i < glyphCode.length; i++) {
+            glyphCode[i] = 0;
         }
     }
 
     function drawGlyphMap() {
-        for(let i=0; i < colData.length; i++) {
-            let currColNum = colData[i]
+        for(let i=0; i < glyphCode.length; i++) {
+            let currColNum = glyphCode[i]
             for(let rI=0; rI < root.rows; rI++) {
                 var gridIndex = i + (rI * root.columns)
                 if(currColNum & (0x01 << rI)) {
@@ -71,11 +71,11 @@ Rectangle {
 
                 onToggled: {
                     if(checked) {
-                        root.colData[colIndex] = root.colData[colIndex] + (2**rowIndex)
+                        root.glyphCode[colIndex] = root.glyphCode[colIndex] + (2**rowIndex)
                     } else {
-                        root.colData[colIndex] = root.colData[colIndex] - (2**rowIndex)
+                        root.glyphCode[colIndex] = root.glyphCode[colIndex] - (2**rowIndex)
                     }
-                    //console.log("In Toggle, index", colIndex, ". Value", root.colData[colIndex])
+                    //console.log("In Toggle, index", colIndex, ". Value", root.glyphCode[colIndex])
                 }
                 Connections {
                     target: root
@@ -92,8 +92,8 @@ Rectangle {
 
     Component.onCompleted: {
         root.addColumns(root.columns)
-        // root.colData[0] = 60; root.colData[1] = 66; root.colData[2] = 66;
-        // root.colData[3] = 66; root.colData[4] = 60;
+        // root.glyphCode[0] = 60; root.glyphCode[1] = 66; root.glyphCode[2] = 66;
+        // root.glyphCode[3] = 66; root.glyphCode[4] = 60;
         // root.drawGlyphMap()
     }
 
