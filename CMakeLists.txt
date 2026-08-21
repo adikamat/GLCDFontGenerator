@@ -21,9 +21,10 @@ qt_add_qml_module(appGLCDByteArrayGenerator
         qml/GridSizeControl.qml
         qml/GLCDGlyphDrawer.qml
         qml/GlyphDelegate.qml
+        qml/GlyphSaveDialog.qml
+        qml/GlyphsExportDialog.qml
     SOURCES
         src/glyphdata.h src/glyphdata.cpp
-        QML_FILES qml/GlyphSaveDialog.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

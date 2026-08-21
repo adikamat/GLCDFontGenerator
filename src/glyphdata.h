@@ -3,6 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QString>
+#include <QJsonObject>
 #include <QtQml/qqmlregistration.h>
 
 class Glyph//: public QObject
@@ -21,6 +22,9 @@ public:
     uint16_t getCode() const { return m_code; }
     QString getDescription() const { return m_description; }
     QString getByteArray() const { return m_byteArray; }
+
+    QJsonObject toJsonObject();
+    static std::tuple<Glyph, bool> fromJsonObject(const QJsonObject &jsonObj);
 
 private:
     uint16_t m_code;
@@ -48,6 +52,9 @@ public:
     Q_INVOKABLE void addNewData(uint16_t _code,
                                 const QString &_bA,
                                 const QString &_desc = "");
+
+    Q_INVOKABLE bool exportModelToJson(int rows, int cols, QString filename);
+    Q_INVOKABLE bool loadModelFromFile(QString filename);
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
